@@ -1,0 +1,164 @@
+<nz-modal [(nzVisible)]="isModalVisible" [nzFooter]="modalFooter" nzTitle="{{ isEdit ? 'Editar usuário' : 'Realizar novo cadastro' }}" (nzOnCancel)="closeModal(undefined)" nzWidth="600px">
+    <ng-container *nzModalContent>
+        <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" class="form">
+
+            <h3>Informações Pessoais</h3>
+
+            <nz-form-item>
+                <nz-form-label [nzSpan]="7" nzRequired>Nome Completo</nz-form-label>
+
+                <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+
+                    <input nz-input formControlName="name" placeholder="Nome completo" />
+
+                    <ng-template #userErrorTpl let-control>
+                        <ng-container *ngIf="control.hasError('required')">Por favor insira seu nome!</ng-container>
+
+                        <ng-container *ngIf="control.hasError('pattern')">Nome deve conter apenas caracteres e espaços!</ng-container>
+                    </ng-template>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSpan]="7" nzRequired>E-mail</nz-form-label>
+
+                <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="emailErrorTpl">
+
+                    <input nz-input formControlName="email" placeholder="E-mail" type="email" />
+
+                    <ng-template #emailErrorTpl let-control>
+                        <ng-container *ngIf="control.hasError('email')">Esse e-mail não é válido!</ng-container>
+
+                        <ng-container *ngIf="control.hasError('alreadyTaken')">Esse e-mail já está sendo usado!</ng-container>
+
+                        <ng-container *ngIf="control.hasError('required')">Por favor insira o seu e-mail!</ng-container>
+                    </ng-template>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSpan]="7" nzRequired>CPF</nz-form-label>
+
+                <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="cpfErrorTpl">
+
+                    <input nz-input formControlName="cpf" placeholder="000.000.000-00" type="text" />
+
+                    <ng-template #cpfErrorTpl let-control>
+                        <ng-container *ngIf="control.hasError('pattern')">CPF inválido, confira o formato!</ng-container>
+
+                        <ng-container *ngIf="control.errors?.['invalidCpf'] && !control.hasError('pattern')">CPF inválido, confira os dados!</ng-container>
+
+                        <ng-container *ngIf="control.hasError('alreadyTaken')">Esse CPF já está sendo usado!</ng-container>
+
+                        <ng-container *ngIf="control.hasError('required')">Por favor insira o CPF.</ng-container>
+                    </ng-template>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSpan]="7" nzRequired>Telefone com DDD</nz-form-label>
+
+                <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="phoneErrorTpl">
+
+                    <input nz-input formControlName="phoneNumber" placeholder="Número de Telefone" type="text" />
+
+                    <ng-template #phoneErrorTpl let-control>
+                        <ng-container *ngIf="control.hasError('pattern')">Esse telefone não é válido!</ng-container>
+
+                        <ng-container *ngIf="control.hasError('required')">Por favor insira o telefone.</ng-container>
+                    </ng-template>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSpan]="7" [nzRequired]="!isEdit">{{isEdit ? "Nova senha" : "Senha"}}</nz-form-label>
+
+                <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Senha deve conter letras maiúsculas, minúsculas, números e simbolos!">
+
+                    <input nz-input type="password" formControlName="password" placeholder="****" />
+                </nz-form-control>
+            </nz-form-item>
+
+            <div formArrayName="addresses">
+                <nz-form-item *ngFor="let addresses of addressForm.controls; let i = index" [formGroupName]="i" class="addressForm">
+                    <div class="addressFormTitle">
+                        <h3>Endereço {{ i + 1 }}</h3>
+
+                        <button class="removeAddressBtn" (click)="removeAddressField(i)" *ngIf="i > 0">X</button>
+                    </div>
+
+                    <div class="addressFormInput-div">
+                        <nz-form-label [nzSpan]="7" nzRequired nzFor="cep">CEP</nz-form-label>
+
+                        <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="cepErrorTpl">
+
+                            <input nz-input type="text" placeholder="000000-00" name="cep" class="addressFormInput" formControlName="cep" />
+
+                            <ng-template #cepErrorTpl let-control>
+                                <ng-container *ngIf="addressForm.controls[i].get('cep')?.hasError('required')">Por favor insira o cep!</ng-container>
+
+                                <ng-container *ngIf="addressForm.controls[i].get('cep')?.hasError('pattern')">CEP inválido!</ng-container>
+                            </ng-template>
+                        </nz-form-control>
+                    </div>
+
+                    <div class="addressFormInput-div">
+                        <nz-form-label [nzSpan]="7" nzRequired nzFor="estado" class="addressFormLabel">Estado</nz-form-label>
+
+                        <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="estadoErrorTpl">
+
+                            <input nz-input type="text" placeholder="Estado" name="estado" class="addressFormInput" formControlName="estado" />
+
+                            <ng-template #estadoErrorTpl let-control>
+                                <ng-container *ngIf="addressForm.controls[i].get('estado')?.hasError('required')">Por favor insira o Estado!</ng-container>
+
+                                <ng-container *ngIf="addressForm.controls[i].get('estado')?.hasError('pattern')">Estado inválido!</ng-container>
+                            </ng-template>
+                        </nz-form-control>
+                    </div>
+
+                    <div class="addressFormInput-div">
+                        <nz-form-label [nzSpan]="7" nzRequired nzFor="cidade" class="addressFormLabel">Cidade</nz-form-label>
+
+                        <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="cidadeErrorTpl">
+
+                            <input nz-input type="text" placeholder="Cidade" name="cidade" class="addressFormInput" formControlName="cidade" />
+
+                            <ng-template #cidadeErrorTpl let-control>
+                                <ng-container *ngIf="addressForm.controls[i].get('cidade')?.errors?.['required']">Por favor insira a Cidade!</ng-container>
+
+                                <ng-container *ngIf="addressForm.controls[i].get('cidade')?.hasError('pattern')">Cidade inválida!</ng-container>
+                            </ng-template>
+                        </nz-form-control>
+                    </div>
+
+                    <div class="addressFormInput-div">
+                        <nz-form-label [nzSpan]="7" nzRequired nzFor="endereco" class="addressFormLabel">Endereço</nz-form-label>
+
+                        <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="enderecoErrorTpl">
+
+                            <input nz-input type="text" placeholder="Endereço" name="endereco" class="addressFormInput" formControlName="endereco" />
+
+                            <ng-template #enderecoErrorTpl let-control>
+                                <ng-container *ngIf="addressForm.controls[i].get('endereco')?.hasError('required')">Por favor insera o Endereço!</ng-container>
+
+                                <ng-container *ngIf="addressForm.controls[i].get('endereco')?.hasError('pattern')">Endereço inválido!</ng-container>
+                            </ng-template>
+                        </nz-form-control>
+                    </div>
+                </nz-form-item>
+            </div>
+
+            <span *ngIf="addressForm.errors?.['hasDuplicateAddress']" class="error">*{{ addressForm.errors?.['hasDuplicateAddress'] }}</span>
+
+            <button (click)="addNewAddress()" type="button" class="addAddresFormBtn">Cadastrar outro endereço</button>
+        </form>
+    </ng-container>
+
+    <ng-template #modalFooter>
+        <button nz-button nzType="default" (click)="closeModal(undefined)">Cancelar</button>
+
+        <button nz-button nzType="primary" [disabled]="!validateForm.valid || validateForm.pristine" (click)="submitForm()">Enviar</button>
+    </ng-template>
+
+</nz-modal>

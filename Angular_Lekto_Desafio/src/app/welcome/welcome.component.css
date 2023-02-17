@@ -1,0 +1,42 @@
+.welcome-container {
+    margin-top: 200px;
+    background-color: white;
+    padding: 24px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 400px;
+    text-align: center;
+}
+
+
+.navigation {
+    display: flex;
+    gap: 16px;
+    align-self: center;
+}
+
+.link {
+  font-size: 16px;
+  background-color: #005bff;
+  padding: 8px;
+  border-radius: 8px;
+  color: white;
+  width: 100px;
+}
+
+.noDeco {
+  background-color: transparent;
+  color: black;
+  text-decoration: underline;
+}
+
+.welcome-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.loggedIn {
+    min-width: 170px;
+}

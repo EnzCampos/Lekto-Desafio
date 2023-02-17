@@ -1,0 +1,19 @@
+<div class="welcome-container" *ngIf="user">
+    Seja bem vindo {{ user }}, o que deseja fazer hoje?
+
+    <div class="navigation">
+        <a class="link loggedIn noDeco" (click)="contactModal()">Entrar em contato</a>
+
+        <a class="link loggedIn btn" routerLink="dashboard">Acessar Dashboard</a>
+    </div>
+</div>
+
+<div class="welcome-container" *ngIf="!user">
+    <span class="welcome-title">Seja bem vindo!</span>
+
+    <span>Para acessar a Dashboard realize o login no botão abaixo.</span>
+
+    <div class="navigation">
+        <a class="link btn" routerLink="login">Entrar</a>
+    </div>
+</div>

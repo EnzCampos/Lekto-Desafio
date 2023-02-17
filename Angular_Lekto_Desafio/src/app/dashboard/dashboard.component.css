@@ -1,0 +1,71 @@
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+    flex-direction: column;
+}
+
+.table {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.table-btns {
+    border: 0px;
+    background-color: inherit;
+    cursor: pointer;
+}
+
+.delete {
+    color: red;
+}
+
+.edit {
+    color: dodgerblue
+}
+
+.search-box {
+  padding: 8px;
+}
+
+.search-box input {
+  width: 188px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.search-box button {
+  width: 90px;
+}
+
+.search-button {
+  margin-right: 8px;
+}
+
+.new-btn {
+    background-color: white;
+    align-self: flex-end;
+    border: 0px;
+    border-radius: 6px;
+    padding:8px;
+    cursor: pointer;
+}
+
+.center {
+    text-align: center;
+}
+
+.address-table {
+    border-top: 1px solid #d7d7d7;
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    gap: 5px;
+}
+
+.text-grouping {
+}
+

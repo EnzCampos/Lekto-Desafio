@@ -1,0 +1,51 @@
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.addressForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.addressFormInput-div {
+  display: flex;
+}
+
+.addressFormTitle {
+  padding-top: 5px;
+  border-top: 1px solid #8e8e8e;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: space-between;
+}
+
+.removeAddressBtn {
+  color: #D44333;
+  background-color: transparent;
+  border-color: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  position: relative;
+  top: -3px;
+}
+
+.addAddresFormBtn {
+  border-color: transparent;
+  border-radius: 8px;
+  padding: 6px;
+  align-self: flex-end;
+  cursor: pointer;
+  font-size: 14px;
+  color: white;
+  background-color: #0095FF;
+}
+
+.error {
+    text-align: center;
+    color: red;
+    font-size: 16px;
+    margin-bottom: 10px;
+}

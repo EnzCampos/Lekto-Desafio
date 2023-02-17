@@ -1,0 +1,14 @@
+<header>
+  <h1 id="tableLabel" class="title">Desafio Lekto</h1>
+  <div class="header-links">
+      <a class="link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+
+      <button class="contactBtn" (click)="contactModal()">Entre em contato</button>
+
+      <a class="link" *ngIf="loggedIn" routerLink="dashboard" routerLinkActive="active">Dashboard</a>
+
+      <a class="logout" *ngIf="!loggedIn" routerLink="login" routerLinkActive="active">Entrar</a>
+
+      <a class="logout" (click)="logout()" *ngIf="loggedIn" routerLinkActive="active">Sair</a>
+  </div>
+</header>

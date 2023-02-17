@@ -1,0 +1,82 @@
+<div class="content">
+    <section class="table">
+        <button class="new-btn" (click)="toggleUserFormModal(undefined)">+ Realiar novo cadastro</button>
+
+        <nz-table #nzTable [nzData]="users" [nzLoading]="loading" nzTableLayout="fixed" [nzLoadingIndicator]="loadingTemplate">
+
+            <thead>
+                <tr>
+                    <th nzCustomFilter>
+                        Nome
+                        <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
+                            <span nz-icon nzType="search">Buscar</span>
+                        </nz-filter-trigger>
+                    </th>
+                    <th>CPF</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th>Endereços</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <ng-template #loadingTemplate let-loading class="loadingIndicator">
+                    <nz-spin nzSimple [nzSize]="'large'"></nz-spin>
+                </ng-template>
+
+                <tr *ngFor="let data of nzTable.data" class="table-content">
+                    <td>{{ data.name }}</td>
+                    <td>{{ data.cpf }}</td>
+                    <td>{{ data.email }}</td>
+                    <td>{{ data.phoneNumber }}</td>
+
+                    <td>
+                        <div *ngFor="let address of data.addresses" class="address-table">
+                            <div class="text-grouping">
+                                <span class="address-span">{{ address.endereco }},</span>
+                            </div>
+                            <div class="text-grouping">
+                                <span class="address-span">{{ address.cidade }}, </span>
+                                <span class="address-span">{{ address.estado }}, </span>
+                                <span class="address-span">{{ address.cep }}.</span>
+                            </div>
+                        </div>
+                    </td>
+
+                    <td class="btns">
+                        <button class="table-btns edit" (click)="toggleUserFormModal(data)">Editar</button>
+
+                        <nz-divider nzType="vertical"></nz-divider>
+
+                        <button class="table-btns delete" (click)="showDeleteModal(data.cpf)">
+                            Excluir
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+            <div class="ant-table-filter-dropdown">
+                <div class="search-box">
+                    <input type="text" nz-input placeholder="Buscar nome" [(ngModel)]="searchValue" />
+
+                    <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">Buscar</button>
+
+                    <button nz-button nzSize="small" (click)="reset()">Limpar</button>
+                </div>
+            </div>
+        </nz-dropdown-menu>
+    </section>
+</div>
+
+<!--Modal de Deletar Usuário-->
+<nz-modal [(nzVisible)]="isDeleteModalVisible" nzTitle="Deletar usuário" (nzOnCancel)="handleCancelDeleteModal()" (nzOnOk)="handleOkDeleteModal()">
+    <ng-container *nzModalContent>
+        <span>Tem certeza que deseja excluir o usuário com CPF: {{ userToDelete }}, cadastrado? </span>
+
+        <span>Essa ação não poderá ser desfeita</span>
+    </ng-container>
+</nz-modal>
+
+<app-user-form *ngIf="isUserFormModalVisible" [isModalVisible]="isUserFormModalVisible" (toggleModal)="toggleUserFormModal(undefined)" [initialUser]="userToEdit"></app-user-form>

@@ -1,0 +1,39 @@
+<form nz-form [formGroup]="validateForm" class="login" (ngSubmit)="submitForm()">
+
+    <h3 class="login-title">Faça seu Login</h3>
+
+    <h4 class="input-label">Insira seu CPF (000.000.000-00) ou Email</h4>
+
+    <nz-form-item>
+
+        <nz-form-control nzErrorTip="Por favor insira CPF ou Email válido!">
+            <nz-input-group nzPrefixIcon="user">
+                <input type="text" nz-input formControlName="credentials" placeholder="CPF ou Email" />
+            </nz-input-group>
+        </nz-form-control>
+
+    </nz-form-item>
+
+    <h4 class="input-label">Insira sua senha</h4>
+
+    <nz-form-item>
+        <nz-form-control nzErrorTip="Por favor insira sua senha cadastrada!">
+
+            <nz-input-group nzPrefixIcon="lock">
+                <input type="password" nz-input formControlName="password" placeholder="Senha" />
+            </nz-input-group>
+
+        </nz-form-control>
+    </nz-form-item>
+
+    <div class="unauthorized" *ngIf="formError == 'invalidUser'">Credências erradas, confira seu CPF ou Email.</div>
+
+    <div class="unauthorized" *ngIf="formError == 'invalidPassword'">Senha errada.</div>
+
+    <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">
+
+        <nz-spin *ngIf="loading"></nz-spin>
+
+        Entrar
+    </button>
+</form>
