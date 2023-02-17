@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = ".Net Lekto Desafio", "Lekto Desafio\.Net Lekto Desafio.csproj", "{AE8A451A-E9DB-4B6E-BBE9-EEDE8FD48C20}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "Angular_Lekto_Desafio", "Angular_Lekto_Desafio\Angular_Lekto_Desafio.esproj", "{A0A8A01F-196D-43E9-B58D-309452E53543}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AE8A451A-E9DB-4B6E-BBE9-EEDE8FD48C20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE8A451A-E9DB-4B6E-BBE9-EEDE8FD48C20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE8A451A-E9DB-4B6E-BBE9-EEDE8FD48C20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE8A451A-E9DB-4B6E-BBE9-EEDE8FD48C20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0A8A01F-196D-43E9-B58D-309452E53543}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0A8A01F-196D-43E9-B58D-309452E53543}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0A8A01F-196D-43E9-B58D-309452E53543}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{A0A8A01F-196D-43E9-B58D-309452E53543}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0A8A01F-196D-43E9-B58D-309452E53543}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0A8A01F-196D-43E9-B58D-309452E53543}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {56F64891-A90E-4D93-84B7-997E6F87F2B9}
+	EndGlobalSection
+EndGlobal
